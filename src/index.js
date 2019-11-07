@@ -1,1 +1,3 @@
-# fkz-finance-servers
+const mongoose = require('mongoose')
+
+const connection = mongoose.connect()
