@@ -1,4 +1,16 @@
-import { Schema, model } from 'mongoose'
+import { Document, Schema, model } from 'mongoose'
+import { AccountInterface } from './Account'
+
+export interface UserInterface extends Document {
+  email ?: string,
+  firstName ?: string,
+  lastName ?: string,
+  accounts?: Array<AccountInterface>,
+  fullName(): string,
+
+  createdAt?: string,
+  updatedAt?: string,
+}
 
 const UserSchema = new Schema({
   email: String,
@@ -9,4 +21,4 @@ const UserSchema = new Schema({
   timestamps: true
 })
 
-export default model('User', UserSchema)
+export default model<UserInterface>('User', UserSchema)
