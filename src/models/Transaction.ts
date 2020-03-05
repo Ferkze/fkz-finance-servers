@@ -1,22 +1,23 @@
 import { Document, Schema, model } from 'mongoose'
-import { AccountInterface } from './Account'
+import { IAccount } from './Account'
 import Category, { CategoryInterface } from './Category'
 
 enum TransactionType {
   'DEBIT',
   'CREDIT',
-  'TRANFERENCE',
+  'TRANSFERENCE',
 }
-export interface TransactionInterface extends Document {
-  amount?: number,
-  date?: Date,
-  account: AccountInterface,
-  category: CategoryInterface,
-  type: TransactionType
 
-  createdAt?: string,
-  updatedAt?: string,
+export type Transaction = {
+  amount?: number
+  date?: Date
+  account: IAccount
+  category: CategoryInterface
+  type: TransactionType
+  createdAt?: string
+  updatedAt?: string
 }
+export interface ITransaction extends Transaction, Document {}
 
 const SchemaTransaction = new Schema({
   amount: Number,
@@ -35,4 +36,4 @@ const SchemaTransaction = new Schema({
   timestamps: true
 })
 
-export default model<TransactionInterface>('Transaction', SchemaTransaction)
+export default model<ITransaction>('Transaction', SchemaTransaction)
