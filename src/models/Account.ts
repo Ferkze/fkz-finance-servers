@@ -1,11 +1,11 @@
 import { Document, Schema, model } from 'mongoose'
-import { UserInterface } from './User'
+import { IUser } from './User'
 
 export type Account =  {
   _id: string
   name?: string
   startingBalance?: number
-  owner?: UserInterface['_id']
+  owner?: IUser['_id']
   createdAt?: string
   updatedAt?: string
 }

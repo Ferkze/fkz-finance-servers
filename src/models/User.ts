@@ -1,16 +1,18 @@
 import { Document, Schema, model, Types } from 'mongoose'
 import { AccountSchema, Account} from './Account'
 
-export interface UserInterface extends Document {
-  email ?: string,
-  firstName ?: string,
-  lastName ?: string,
-  accounts?: Types.DocumentArray<Account & Types.Embedded>,
-  fullName(): string,
+export type UserType = {
+  email ?: string
+  firstName ?: string
+  lastName ?: string
+  accounts?: Types.DocumentArray<Account & Types.Embedded>
+  fullName(): string
 
-  createdAt?: string,
-  updatedAt?: string,
+  createdAt?: string
+  updatedAt?: string
 }
+
+export interface IUser extends UserType, Document {}
 
 const UserSchema = new Schema({
   email: String,
@@ -21,4 +23,6 @@ const UserSchema = new Schema({
   timestamps: true
 })
 
-export default model<UserInterface>('User', UserSchema)
+UserSchema.methods.fullName = function (cb: Function) {return `${this.firstName} ${this.lastName}` }
+
+export default model<IUser>('User', UserSchema)
