@@ -1,19 +1,19 @@
 import { Document, Schema, model } from 'mongoose'
 import { UserInterface } from './User'
 
-export type Account = Document & {
+export type Account =  {
   _id: string
-  name?: string,
-  startingValue?: number,
+  name?: string
+  startingBalance?: number
   owner?: UserInterface['_id']
   createdAt?: string
   updatedAt?: string
 }
-export interface IAccount extends Account {}
+export type IAccount = Document & Account
 
-const SchemaAccount = new Schema({
+export const AccountSchema = new Schema({
   name: String,
-  startingValue: Number,
+  startingBalance: Number,
   owner: {
     type: Schema.Types.ObjectId,
     ref: 'User',
@@ -23,4 +23,4 @@ const SchemaAccount = new Schema({
   timestamps: true
 })
 
-export default model<IAccount>('Account', SchemaAccount)
+export default model<IAccount>('Account', AccountSchema)

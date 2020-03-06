@@ -1,11 +1,11 @@
-import { Document, Schema, model } from 'mongoose'
-import { AccountInterface } from './Account'
+import { Document, Schema, model, Types } from 'mongoose'
+import { AccountSchema, Account} from './Account'
 
 export interface UserInterface extends Document {
   email ?: string,
   firstName ?: string,
   lastName ?: string,
-  accounts?: Array<AccountInterface>,
+  accounts?: Types.DocumentArray<Account & Types.Embedded>,
   fullName(): string,
 
   createdAt?: string,
@@ -16,7 +16,7 @@ const UserSchema = new Schema({
   email: String,
   firstName: String,
   lastName: String,
-  accounts: [{ type: Schema.Types.ObjectId, ref: 'Account' }]
+  accounts: [AccountSchema]
 }, {
   timestamps: true
 })

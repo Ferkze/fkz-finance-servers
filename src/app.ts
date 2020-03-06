@@ -27,7 +27,9 @@ class App {
 
   private database(): void {
     mongoose.connect(database.connectionString, {
-      useNewUrlParser: true
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: true
     })
   }
 }
