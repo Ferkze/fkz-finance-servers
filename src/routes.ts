@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import AuthController from './controllers/AuthController'
 import AccountController from './controllers/AccountController'
 import UserController from './controllers/UserController'
 import UserAccountController from './controllers/UserAccountController'
@@ -8,6 +9,10 @@ import IndexController from './controllers/IndexController'
 const router = Router()
 
 router.get('/', IndexController.index)
+
+router.get('/auth/login', AuthController.login)
+router.post('/auth/register', AuthController.register)
+
 router.get('/users', UserController.index)
 router.get('/user/:id', UserController.find)
 router.post('/users', UserController.store)
